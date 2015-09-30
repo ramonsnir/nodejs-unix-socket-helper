@@ -1,6 +1,5 @@
-var fs = require('fs'), 
-	exec = require('child_process').exec, 
-	execSync = require("exec-sync");
+var fs = require('fs'),
+	exec = require('child_process').exec;
 
 module.exports = {
 	isStreamOpen: function(path, callback) {
@@ -11,9 +10,7 @@ module.exports = {
 				return callback(false);
 			});
 		} else {
-			var stdout = execSync(st);
-			if (stdout != null) return (stdout.indexOf(path) != -1);
-			return false;
+			throw new Error('callback is required');
 		}
 	},
 	prepareStream: function(path, callback)	{
@@ -53,11 +50,7 @@ module.exports = {
 				return callback(null);
 			});
 		} else {
-			var stdout = execSync(st);
-			for (var i = 0; i < paths.length; i++) {
-				if (stdout.indexOf(paths[i]) == -1) return paths[i];
-			}
-			return null;
+			throw new Error('callback is required');
 		}
 	},
 	listen: function(server, option, callback) {
